@@ -17,7 +17,7 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
-          <div className="bg-amber-500 text-white w-10 h-10 flex items-center justify-center rounded-full font-bold text-lg shadow-md">
+          <div className="bg-blue-500 text-white w-10 h-10 flex items-center justify-center rounded-full font-bold text-lg shadow-md">
             LM
           </div>
           <span className="text-xl font-semibold text-gray-800 hidden sm:inline">
@@ -33,14 +33,14 @@ const Header = () => {
               to={link.path}
               className={`py-1 px-3 text-sm rounded-md text-md font-medium transition-all duration-300 ${
                 location.pathname === link.path
-                  ? "bg-amber-500 text-white shadow-md"
-                  : "text-gray-600 hover:text-amber-600 hover:bg-amber-50"
+                  ? "bg-blue-500 text-white shadow-md"
+                  : "text-gray-600 hover:text-blue-600 hover:bg-blue-50"
               }`}
             >
               {link.label}
             </Link>
           ))}
-          <div className="bg-amber-400 hover:cursor-pointer hover:bg-amber-300 inline-flex items-center justify-center h-10 w-10 rounded-full">
+          <div className="bg-blue-400 hover:cursor-pointer hover:bg-blue-300 inline-flex items-center justify-center h-10 w-10 rounded-full">
             <User color="#fff"/>
           </div>
         </nav>
@@ -67,8 +67,8 @@ const Header = () => {
               to={link.path}
               className={`py-2 px-3 rounded-md transition-colors ${
                 location.pathname === link.path
-                  ? "bg-amber-100 text-amber-700 font-medium"
-                  : "text-gray-600 hover:text-amber-600"
+                  ? "bg-blue-100 text-blue-700 font-medium"
+                  : "text-gray-600 hover:text-blue-600"
               }`}
               onClick={() => setIsOpen(false)}
             >
