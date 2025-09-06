@@ -3,7 +3,7 @@ const LeadContext = createContext(null)
 import axios from 'axios'
 import { toast } from "react-toastify";
 const LeadProvider = ({ children }) => {
-    axios.defaults.baseURL = 'http://localhost:3000'
+    axios.defaults.baseURL = 'https://lead-management-nxjo.onrender.com'
     const [leads, setLeads] = useState([])
     const [loading, setLoading] = useState(false)
 

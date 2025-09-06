@@ -8,7 +8,7 @@ const leadRoutes = require('./routes/lead.routes')
 
 app.use(express.json())
 app.use(cors({
-    origin: '*'
+    origin: 'https://lead-management11.netlify.app'
 }))
 app.use('/api/leads', leadRoutes)
 
