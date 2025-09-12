@@ -44,14 +44,14 @@ const LeadForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true)
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    if (validateForm()) {
+  if (validateForm()) {
+    try {
       await addLead(formData);
       setIsSubmitted(true);
-      setLoading(false)
 
       setTimeout(() => {
         setFormData({
@@ -64,8 +64,16 @@ const LeadForm = () => {
         setIsSubmitted(false);
         navigate("/lead-list");
       }, 2000);
+    } catch (err) {
+      console.error("Error adding lead:", err);
+    } finally {
+      setLoading(false); 
     }
-  };
+  } else {
+    setLoading(false); 
+  }
+};
+
 
   return (
     <div className="min-h-screen flex bg-gradient-to-br from-blue-50 to-indigo-100 px-4 py-8">
