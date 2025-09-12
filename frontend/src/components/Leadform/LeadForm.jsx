@@ -11,8 +11,9 @@ const LeadForm = () => {
     source: "",
     status: "new",
   });
-  const { addLead, loading } = useLead();
+  const { addLead } = useLead();
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate();
 
@@ -37,6 +38,7 @@ const LeadForm = () => {
     }
 
     if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
+    if (formData.phone.trim().length !== 10) newErrors.phone = "Phone number should be of 10 digits";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -44,10 +46,12 @@ const LeadForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
 
     if (validateForm()) {
       await addLead(formData);
       setIsSubmitted(true);
+      setLoading(false)
 
       setTimeout(() => {
         setFormData({
@@ -66,22 +70,22 @@ const LeadForm = () => {
   return (
     <div className="min-h-screen flex bg-gradient-to-br from-blue-50 to-indigo-100 px-4 py-8">
       <div className="max-w-4xl w-full mx-auto flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-2xl">
-        {/* Left side - illustration/form overview */}
+
         <div className="w-full md:w-2/5 bg-gradient-to-b from-blue-600 to-indigo-700 text-white p-8 flex flex-col justify-between">
           <div>
-            <button 
+            <button
               onClick={() => navigate("/lead-list")}
               className="flex items-center text-blue-100 hover:text-white transition-colors mb-10"
             >
               <ArrowLeft size={18} className="mr-2" />
               Back to Leads
             </button>
-            
+
             <h1 className="text-3xl font-bold mb-4">Capture New Lead</h1>
             <p className="text-blue-100 mb-6">
               Fill in the details below to add a new potential customer to your sales pipeline.
             </p>
-            
+
             <div className="space-y-4 mt-10">
               <div className="flex items-center">
                 <div className="w-10 h-10 rounded-full bg-white text-blue-400 flex items-center justify-center mr-3">
@@ -103,13 +107,12 @@ const LeadForm = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="hidden md:block">
             <p className="text-blue-200 text-sm">© 2025 LeadManager</p>
           </div>
         </div>
 
-        {/* Right side - form */}
         <div className="w-full md:w-3/5 bg-white p-8 md:p-10 flex flex-col justify-center">
           {isSubmitted ? (
             <div className="text-center py-10">
@@ -120,7 +123,7 @@ const LeadForm = () => {
               <p className="text-gray-600 mb-6">
                 The lead has been added to your system and you'll be redirected shortly.
               </p>
-              <div className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin mx-auto"></div>
+              <div className="w-16 h-16 border-t-4 border-t-black border-blue-500 border-solid rounded-full animate-spin mx-auto"></div>
             </div>
           ) : (
             <>
@@ -143,9 +146,8 @@ const LeadForm = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                        errors.name ? "border-red-500" : "border-gray-300"
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.name ? "border-red-500" : "border-gray-300"
+                        }`}
                       placeholder="John Doe"
                     />
                     {errors.name && (
@@ -165,9 +167,8 @@ const LeadForm = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                        errors.email ? "border-red-500" : "border-gray-300"
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.email ? "border-red-500" : "border-gray-300"
+                        }`}
                       placeholder="john.doe@example.com"
                     />
                     {errors.email && (
@@ -187,9 +188,8 @@ const LeadForm = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                        errors.phone ? "border-red-500" : "border-gray-300"
-                      }`}
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.phone ? "border-red-500" : "border-gray-300"
+                        }`}
                       placeholder="(123) 456-7890"
                     />
                     {errors.phone && (

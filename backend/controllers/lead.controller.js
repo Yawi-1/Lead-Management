@@ -25,7 +25,7 @@ const addNewLead = async (req, res) => {
 
 const getAllLeads = async (req, res) => {
     try {
-        const { page = 1, limit = 5 } = req.query;
+        const { page = 1, limit = 20 } = req.query;
         const skip = (page - 1) * limit;
         const leads = await Lead.find({})
             .skip(skip)

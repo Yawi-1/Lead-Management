@@ -17,8 +17,8 @@ const LeadTable = ({ filteredLeads }) => {
           </thead>
           <tbody className="divide-y divide-gray-100">
             {filteredLeads.length > 0 ? (
-              filteredLeads.map((lead) => (
-                <tr key={lead.id} className="hover:bg-gray-50 transition-colors">
+              filteredLeads.map((lead,index) => (
+                <tr key={lead._id} className="hover:bg-gray-50 transition-colors">
                   <td className="py-4 px-6">
                     <div className="flex items-center">
                       <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
@@ -26,7 +26,7 @@ const LeadTable = ({ filteredLeads }) => {
                       </div>
                       <div>
                         <p className="font-medium text-gray-800">{lead.name}</p>
-                        <p className="text-sm text-gray-500">ID: {lead.id}</p>
+                        <p className="text-sm text-gray-500">ID: {index+1}</p>
                       </div>
                     </div>
                   </td>
